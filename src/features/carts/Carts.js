@@ -10,6 +10,7 @@ import {
   incrementIfOdd,
   selectCount,
 } from "./cartsSlice";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -77,7 +78,20 @@ export function Carts() {
                     </p>
                   </div>
                   <div className="flex flex-1 items-end justify-between text-sm">
-                    <p className="text-gray-500">Qty {product.quantity}</p>
+                    <div className="text-gray-500">
+                      <label 
+                        htmlFor="qty"
+                        className="inline text-sm font-medium leading-6 text-gray-900 mr-5"
+                        >
+                          Qty
+                      </label>
+                      <select name="Quantity" id="qty">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                      </select>
+                    </div>
 
                     <div className="flex">
                       <button
@@ -113,6 +127,7 @@ export function Carts() {
         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
           <p>
             or{" "}
+            <Link to='/'>
             <button
               type="button"
               className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -121,6 +136,7 @@ export function Carts() {
               Continue Shopping
               <span aria-hidden="true"> &rarr;</span>
             </button>
+            </Link>
           </p>
         </div>
       </div>{" "}
