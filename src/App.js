@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 import CartsPage from './pages/CartsPage';
 import Checkout from './pages/Checkout';
-import ProductDetails from './features/product-list/Component/ProductDetails';
+import ProductDetails from './features/product/Component/ProductDetails';
 import ProductDetailsPage from './pages/ProductDetailsPage';
 
 const router = createBrowserRouter([
