@@ -1165,8 +1165,8 @@ export default function ProductList() {
                         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                           {products.map((product) => (
                             <Link to="/product-detail">
-                              <div key={product.id} className="group relative">
-                                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                              <div key={product.id} className="group relative border-solid border-2 border-gray-200 p-1">
+                                <div className="min-h-60 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-60">
                                   <img
                                     src={product.thumbnail}
                                     alt={product.title}
@@ -1190,9 +1190,14 @@ export default function ProductList() {
                                       
                                     </p>
                                   </div>
+                                  <div>
                                   <p className="text-sm font-medium text-gray-900">
-                                    {product.price}
+                                    ${Math.round(product.price*(1-product.discountPercentage/100))}
                                   </p>
+                                  <p className="text-sm line-through font-medium text-gray-400">
+                                    ${product.price}
+                                  </p>
+                                  </div>
                                 </div>
                               </div>
                             </Link>
