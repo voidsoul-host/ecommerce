@@ -553,4 +553,10 @@ const products = [
 
 const categories = new Set([...products.map(p=>p.category)])
 
-console.log(categories.map(c=>({value:c, label:c.split('-').join(' '), checked: false})))
+const transformedCategories = Array.from(categories).map(c => ({
+    value: c,
+    label: c.split('-').join(' '),
+    checked: false
+}));
+
+console.log(transformedCategories);
