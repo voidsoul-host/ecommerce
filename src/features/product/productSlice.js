@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchAllProducts } from './productAPI';
 
 const initialState = {
-  value: 0,
+  products: [],
   status: 'idle',
 };
 
@@ -13,14 +13,14 @@ const initialState = {
 // typically used to make async requests.
 export const fetchAllProductsAsync = createAsyncThunk(
   'product/fetchAllProducts',
-  async (amount) => {
+  async () => {
     const response = await fetchAllProducts();
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
 );
 
-export const productListSlice = createSlice({
+export const productSlice = createSlice({
   name: 'product',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
@@ -42,16 +42,16 @@ export const productListSlice = createSlice({
       })
       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value += action.payload;
+        state.products = action.payload;
       });
   },
 });
 
-export const { increment } = productListSlice.actions;
+export const { increment } = productSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectCount = (state) => state.counter.value;
+export const selectAllProducts = (state) => state.product.products;
 
-export default productListSlice.reducer;
+export default productSlice.reducer;
