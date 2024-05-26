@@ -13,7 +13,6 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import { Link } from "react-router-dom";
-import { fetchProductByFilters } from "../productAPI";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
