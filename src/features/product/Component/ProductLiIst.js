@@ -15,11 +15,11 @@ import {
 import { Link } from "react-router-dom";
 
 const sortOptions = [
-  { name: "Most Popular", sort: "rating", current: true }, // for this not done but I have to do
-  { name: "Best Rating", sort: "rating", current: false },
+  { name: "Most Popular", sort: "rating", order:'desc', current: true }, // for this not done but I have to do
+  { name: "Best Rating", sort: "rating", order:'desc', current: false },
   { name: "Newest", sort: "date", current: false }, // for this not done but I have to do
-  { name: "Price: Low to High", sort: "price", current: false },
-  { name: "Price: High to Low", sort: "price", current: false },
+  { name: "Price: Low to High", sort: "price", order:'asc', current: false },
+  { name: "Price: High to Low", sort: "price", order:'desc', current: false },
 ];
 
 const filters = [
@@ -53,7 +53,7 @@ const filters = [
     ],
   },
   {
-    id: "brands",
+    id: "brand",
     name: "Brands",
     options: [
       { value: 'Essence', label: 'Essence', checked: false },
@@ -952,9 +952,14 @@ export default function ProductList() {
     const newFilter = {...filter, [section.id]: option.value}
     setFilter(newFilter)
     dispatch(fetchProductByFiltersAsync(newFilter))
-    console.log(section.id, option.value)
   }
   
+  const handleSort = (e, option) =>{
+    const newFilter = {...filter, _sort: option.sort, _order: option.order }
+    setFilter(newFilter)
+    dispatch(fetchProductByFiltersAsync(newFilter))
+  }
+
   useEffect(() => {
     dispatch(fetchAllProductsAsync());
   }, [dispatch]);
@@ -1108,8 +1113,8 @@ export default function ProductList() {
                           {sortOptions.map((option) => (
                             <Menu.Item key={option.name}>
                               {({ active }) => (
-                                <a
-                                  href={option.href}
+                                <p
+                                  onClick={e=>handleSort(e, option)}
                                   className={classNames(
                                     option.current
                                       ? "font-medium text-gray-900"
@@ -1119,7 +1124,7 @@ export default function ProductList() {
                                   )}
                                 >
                                   {option.name}
-                                </a>
+                                </p>
                               )}
                             </Menu.Item>
                           ))}
