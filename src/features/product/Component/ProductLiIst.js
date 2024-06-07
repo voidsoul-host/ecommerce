@@ -15,11 +15,11 @@ import {
 import { Link } from "react-router-dom";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "Most Popular", sort: "rating", current: true }, // for this not done but I have to do
+  { name: "Best Rating", sort: "rating", current: false },
+  { name: "Newest", sort: "date", current: false }, // for this not done but I have to do
+  { name: "Price: Low to High", sort: "price", current: false },
+  { name: "Price: High to Low", sort: "price", current: false },
 ];
 
 const filters = [
@@ -948,16 +948,16 @@ export default function ProductList() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filter, setFilter] = useState({})
 
-  useEffect(() => {
-    dispatch(fetchAllProductsAsync());
-  }, [dispatch]);
-
   const handleFilter = (e, section, option) =>{
     const newFilter = {...filter, [section.id]: option.value}
     setFilter(newFilter)
     dispatch(fetchProductByFiltersAsync(newFilter))
     console.log(section.id, option.value)
   }
+  
+  useEffect(() => {
+    dispatch(fetchAllProductsAsync());
+  }, [dispatch]);
 
   return (
     <div>
